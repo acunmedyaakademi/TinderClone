@@ -1,0 +1,129 @@
+body{
+    background-color: #333333;
+}
+.container{
+    display: flex;
+}
+.tinder{
+    width: 375px;
+    height: 700px;
+    flex-shrink: 0;
+    background: rgba(0, 0, 0, 0.40);
+    position: relative;
+    left: 38%;
+    transform: translate(-50%);
+    margin-top: 30px;
+}
+.userIcon{
+    width: 30px;
+    height: 32px;
+    flex-shrink: 0;
+    filter: drop-shadow(4px 4px 20px rgba(0, 0, 0, 0.25));
+}
+.icon{
+    width: 55px;
+    height: 55px;
+    flex-shrink: 0;
+    filter: drop-shadow(4px 4px 20px rgba(0, 0, 0, 0.25));
+}
+.messageIcon{
+    width: 30px;
+    height: 30px;
+    flex-shrink: 0;
+    filter: drop-shadow(4px 4px 20px rgba(0, 0, 0, 0.25));
+}
+.header{
+    margin-left: 80px;
+    
+}
+.userInfo{
+    width: 275px;
+    height: 43px;
+    flex-shrink: 0;
+    margin-top: 500px;
+    margin-left: 70px;
+}
+.userInfo p{
+    color: #FFF;
+    font-family: 'Open Sans';
+    font-size: 32px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+}
+.subIcon{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.xIcon{
+    padding-right: 20px;
+}
+.heartIcon{
+    padding-left: 20px;
+}
+.backgroundImg{
+    position: absolute;
+    top: 0px;
+    width: 375px;
+    z-index: -1; 
+}
+.messageArea{
+    position: relative;
+    left: 0;
+    width: 250px;
+    height: 860px;
+    background-color: rgba(0, 0, 0, 0.25);
+}
+.message{
+    display: flex;
+    justify-content: center;
+    color: #FFF;
+    font-family: 'Open Sans';
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+.user_msg{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.userMessage{
+    display: flex;
+}
+.messageUserImg{
+    width: 50px;
+    height: 50px;
+    flex-shrink: 0;
+}
+.user_msg{
+    padding-left: 35px;
+}
+.messageUserName{
+    display: flex;
+}
+.messageUserName p{
+    color: #FFF;
+    font-family: 'Open Sans';
+    font-size: 15px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    margin-bottom: 10px;
+}
+.userMessageMsg {
+    display: flex;
+}
+.userMessageMsg p{
+    color: #8D8D8D;
+    font-family: 'Open Sans';
+    font-size: 10px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    margin: 0;
+}
+
+
