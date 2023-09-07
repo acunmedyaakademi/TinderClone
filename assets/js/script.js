@@ -88,59 +88,59 @@ function createButtonListener(love) {
 let nopeListener = createButtonListener(false);
 let loveListener = createButtonListener(true);
 
-nope.addEventListener('click', nopeListener);
-love.addEventListener('click', loveListener);
 
 
 
-const requestUsersUrl = 'https://mavnvirtkvhbnvtmiddk.supabase.co/rest/v1/tinder';
-let users = [];
-const authorizationKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1hdm52aXJ0a3ZoYm52dG1pZGRrIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTY5MzUwMDYyOSwiZXhwIjoyMDA5MDc2NjI5fQ.cWFtEEnx4NWVVH3gmSDbHZ4hgi5ZJ4mZmKQkChz-e9o';
-const apiKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1hdm52aXJ0a3ZoYm52dG1pZGRrIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTY5MzUwMDYyOSwiZXhwIjoyMDA5MDc2NjI5fQ.cWFtEEnx4NWVVH3gmSDbHZ4hgi5ZJ4mZmKQkChz-e9o';
+import { createClient } from 'https://esm.sh/@supabase/supabase-js@2';
 
-function loadData() {
-    return fetch('https://mavnvirtkvhbnvtmiddk.supabase.co/rest/v1/tinder?id=eq.2',{
-      method: 'GET',
-      headers: {
-          'Authorization': `Bearer ${authorizationKey}`, 
-          'ApiKey': apiKey, 
-        },
-    })
-        .then(response => {
-            
-            return response.json();
-        });
-}
+const supabaseUrl = 'https://mavnvirtkvhbnvtmiddk.supabase.co';
+const secretKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1hdm52aXJ0a3ZoYm52dG1pZGRrIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTY5MzUwMDYyOSwiZXhwIjoyMDA5MDc2NjI5fQ.cWFtEEnx4NWVVH3gmSDbHZ4hgi5ZJ4mZmKQkChz-e9o';
 
-async function render() {
-    try {
-        users = await loadData();
-        
-        const userInfo = document.querySelector('.userInfos');
-        userInfo.innerHTML = '';
+const supabase = createClient(supabaseUrl, secretKey);
 
-        for (let i = 0; i < 1000 && i < users.length; i++) {
-            const currPost = users[i];
-
-            userInfo.innerHTML += `
-                <div class="userInfo">
-                    <h3>${currPost.name}</h3>
-                    
-                    
-                </div>
-            `;
+const renderPosts = async () => {
+    const response = await fetch(`${supabaseUrl}/rest/v1/users`, {
+        headers: {
+            'Content-Type': 'application/json',
+            'apikey': secretKey,
+            'Authorization': `Bearer ${secretKey}`
         }
+    }).then(x => x.json());
 
-       
-    } catch (error) {
-        console.error('Hata: ', error);
-        showLoadError();
+    const tinderCards = document.querySelector('.tinderCards');
+
+    for (const responseData of response) {
+        const image = await supabase
+            .storage
+            .from('image')
+            .getPublicUrl(responseData.image);
+
+            const card = document.createElement('div');
+            card.classList.add('tinderCard');
+            card.innerHTML = `
+                
+                <div class="tinderCardImg">
+                    <img src="${image.data.publicUrl}" alt="${responseData.name}">
+                </div>
+                <div class="userInfo">
+                    <h3>${responseData.name}</h3>
+                    <p>Lorem ipsum dolor sit amet.</p>
+                </div>
+                <div class="subIcon">
+                            <button class="nope">x</button>
+                            <button class="love">y</button>
+                </div>
+                
+            `;
+        
+            card.querySelectorAll('.nope').forEach(button => {
+                button.addEventListener('click', nopeListener);
+            });
+            card.querySelectorAll('.love').forEach(button => {
+                button.addEventListener('click', loveListener);
+            });
+        tinderCards.appendChild(card);
     }
 }
 
-
-function showLoadError() {
-    alert('Veri çekme işlemi başarısız oldu: 404');
-}
-
-render();
+renderPosts();
