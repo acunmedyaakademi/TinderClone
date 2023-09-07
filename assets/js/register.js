@@ -12,7 +12,7 @@ const addPost = async (e) => {
     e.preventDefault();
     const postFormData = Object.fromEntries(new FormData(postForm));
     console.log(postFormData);
-    await fetch(`${supabaseUrl}`, {
+    await fetch(`${supabaseUrl}/rest/v1/users`, {
         method: 'POST',
         body: JSON.stringify({
             username: postFormData.username,
@@ -23,7 +23,7 @@ const addPost = async (e) => {
         }),
         headers: {
             'Content-Type': 'application/json',
-            'Authorization': `Bearer ${secretKey}/rest/v1/users`,
+            'Authorization': `Bearer ${secretKey}`,
             'apikey': secretKey
         }
     })
