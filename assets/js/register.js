@@ -40,29 +40,3 @@ const addPost = async (e) => {
 }
 
 postForm.addEventListener('submit', addPost);
-
-// const renderPosts = async () => {
-//     const response = await fetch(`${supabaseUrl}/rest/v1/users`, {
-//         headers: {
-//             'Content-Type': 'application/json',
-//             'Authorization': `Bearer ${secretKey}/rest/v1/users`,
-//             'apikey': secretKey
-//         }
-//     }).then(x => x.json());
-
-//     for (const responseData of response) {
-//         const image = await supabase
-//             .storage
-//             .from('image')
-//             .getPublicUrl(responseData.image)
-//         // console.log(image);
-//         postList.innerHTML += 
-//         `<li>
-//         <h2>${responseData.name}</h2>
-//         <img src="${image.data.publicUrl}" alt="${responseData.name}"/>
-//         </li>`
-        
-//     }
-// }
-
-// renderPosts();
