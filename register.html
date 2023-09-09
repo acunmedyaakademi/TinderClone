@@ -27,14 +27,17 @@
             <span class="input-border"></span>
         </div>
         <div class="form" style="margin-top: 2em;"> 
-            <input placeholder="Type your text" name="image" type="file" required>
+            <label for="images" class="drop-container" id="dropcontainer">
+                <span class="drop-title">Drop image here</span>
+                or
+                <input type="file" id="images" name="image" accept="image/*" required>
+              </label>
             <span class="input-border"></span>
         </div>
 
-        <button type="submit">Gönder</button>
+        <button type="submit">Register</button>
     </form>
 
-    <ul class="post-lists"></ul>
     
 </body>
 </html>

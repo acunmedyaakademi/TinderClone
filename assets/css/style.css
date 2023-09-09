@@ -88,6 +88,9 @@ body{
     
 }
 .userInfo{
+    position: absolute;
+    bottom: 0;
+    padding-bottom: 130px;
     width: 275px;
     height: 43px;
     flex-shrink: 0;
@@ -112,28 +115,27 @@ body{
 }
 .subIcon{
     display: inline-block;
+    position: absolute;
     align-items: center;
     justify-content: center;
     display: flex;
-    margin-top: 30px;
+    bottom: 0;
+    padding-left: 105px;
 }
 .subIcon button{
-    border-radius: 50%;
-    line-height: 45px;
-    width: 45px;
-    border: 0;
+    border-radius: 80%;
     background-color: #FFF;
+    border: 0;
+    
     
     margin: 10px 8px;
 }
+
+.subIcon img{
+    margin-top: 8px;
+}
 .subIcon button:focus {
     outline: 0;
-}
-.xIcon{
-    padding-right: 20px;
-}
-.heartIcon{
-    padding-left: 20px;
 }
 .backgroundImg{
     position: absolute;
@@ -198,5 +200,3 @@ body{
     line-height: normal;
     margin: 0;
 }
-
-

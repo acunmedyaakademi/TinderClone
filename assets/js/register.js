@@ -1,3 +1,26 @@
+const dropContainer = document.getElementById("dropcontainer")
+const fileInput = document.getElementById("images")
+
+dropContainer.addEventListener("dragover", (e) => {
+  
+  e.preventDefault()
+}, false)
+
+dropContainer.addEventListener("dragenter", () => {
+  dropContainer.classList.add("drag-active")
+})
+
+dropContainer.addEventListener("dragleave", () => {
+  dropContainer.classList.remove("drag-active")
+})
+
+dropContainer.addEventListener("drop", (e) => {
+  e.preventDefault()
+  dropContainer.classList.remove("drag-active")
+  fileInput.files = e.dataTransfer.files
+});
+
+
 import { createClient } from 'https://esm.sh/@supabase/supabase-js@2';
 
 const supabaseUrl = 'https://mavnvirtkvhbnvtmiddk.supabase.co';
@@ -11,32 +34,45 @@ const postList = document.querySelector('.post-lists');
 const addPost = async (e) => {
     e.preventDefault();
     const postFormData = Object.fromEntries(new FormData(postForm));
-    console.log(postFormData);
-    await fetch(`${supabaseUrl}/rest/v1/users`, {
-        method: 'POST',
-        body: JSON.stringify({
-            username: postFormData.username,
-            password: postFormData.password,
-            name: postFormData.name,
-            age: postFormData.age,
-            image: postFormData.image.name
-        }),
-        headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${secretKey}`,
-            'apikey': secretKey
-        }
-    })
 
-    await supabase
-    .storage
-    .from('image')
-    .upload(postFormData.image.name, postFormData.image, {
-        cacheControl: '3600',
-        upsert: false
-    });
-    
-    
+    try {
+        
+        const response = await fetch(`${supabaseUrl}/rest/v1/users`, {
+            method: 'POST',
+            body: JSON.stringify({
+                username: postFormData.username,
+                password: postFormData.password,
+                name: postFormData.name,
+                age: postFormData.age,
+                image: postFormData.image.name
+            }),
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${secretKey}`,
+                'apikey': secretKey
+            }
+        });
+
+       
+        if (response.ok) {
+            
+            alert("Başarıyla kayıt olundu!");
+            window.location.href = "login.html";
+            
+            await supabase
+                .storage
+                .from('image')
+                .upload(postFormData.image.name, postFormData.image, {
+                    cacheControl: '3600',
+                    upsert: false
+                });
+        } else {
+            
+            alert("Kayıt olma işlemi başarısız oldu.");
+        }
+    } catch (error) {
+        console.error("Hata:", error);
+    }
 }
 
 postForm.addEventListener('submit', addPost);

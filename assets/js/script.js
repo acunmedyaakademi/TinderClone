@@ -123,12 +123,11 @@ const renderPosts = async () => {
                     <img src="${image.data.publicUrl}" alt="${responseData.name}">
                 </div>
                 <div class="userInfo">
-                    <h3>${responseData.name}</h3>
-                    <p>Lorem ipsum dolor sit amet.</p>
+                    <h3>${responseData.name} ${responseData.age}</h3>
                 </div>
                 <div class="subIcon">
-                            <button class="nope">x</button>
-                            <button class="love">y</button>
+                    <button class="nope"><img src="assets/img/x.svg" class="xBtn"></button>
+                    <button class="love"><img src="assets/img/heart.svg"></button>
                 </div>
                 
             `;
