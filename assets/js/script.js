@@ -14,7 +14,7 @@ function initCards() {
     tinderContainer.classList.add('loaded');
 }
 
-initCards();
+
 
 allCards.forEach(function (el) {
     let hammertime = new Hammer(el);
@@ -106,7 +106,7 @@ const renderPosts = async () => {
             'Authorization': `Bearer ${secretKey}`
         }
     }).then(x => x.json());
-
+    const shuffledResponse = shuffleArray(response);
     const tinderCards = document.querySelector('.tinderCards');
 
     for (const responseData of response) {
@@ -123,12 +123,11 @@ const renderPosts = async () => {
                     <img src="${image.data.publicUrl}" alt="${responseData.name}">
                 </div>
                 <div class="userInfo">
-                    <h3>${responseData.name}</h3>
-                    <p>Lorem ipsum dolor sit amet.</p>
+                    <h3>${responseData.name} ${responseData.age}</h3>
                 </div>
                 <div class="subIcon">
-                            <button class="nope">x</button>
-                            <button class="love">y</button>
+                    <button class="nope"><img src="assets/img/x.svg" class="xBtn"></button>
+                    <button class="love"><img src="assets/img/heart.svg"></button>
                 </div>
                 
             `;
@@ -140,7 +139,15 @@ const renderPosts = async () => {
                 button.addEventListener('click', loveListener);
             });
         tinderCards.appendChild(card);
+        initCards();
     }
 }
+function shuffleArray(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [array[i], array[j]] = [array[j], array[i]];
+    }
+    return array;
+  }
 
 renderPosts();
