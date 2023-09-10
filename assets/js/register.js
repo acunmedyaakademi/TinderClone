@@ -1,27 +1,6 @@
-const dropContainer = document.getElementById("dropcontainer")
-const fileInput = document.getElementById("images")
-
-dropContainer.addEventListener("dragover", (e) => {
-  
-  e.preventDefault()
-}, false)
-
-dropContainer.addEventListener("dragenter", () => {
-  dropContainer.classList.add("drag-active")
-})
-
-dropContainer.addEventListener("dragleave", () => {
-  dropContainer.classList.remove("drag-active")
-})
-
-dropContainer.addEventListener("drop", (e) => {
-  e.preventDefault()
-  dropContainer.classList.remove("drag-active")
-  fileInput.files = e.dataTransfer.files
-});
-
-
-import { createClient } from 'https://esm.sh/@supabase/supabase-js@2';
+import {
+    createClient
+} from 'https://esm.sh/@supabase/supabase-js@2';
 
 const supabaseUrl = 'https://mavnvirtkvhbnvtmiddk.supabase.co';
 const secretKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1hdm52aXJ0a3ZoYm52dG1pZGRrIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTY5MzUwMDYyOSwiZXhwIjoyMDA5MDc2NjI5fQ.cWFtEEnx4NWVVH3gmSDbHZ4hgi5ZJ4mZmKQkChz-e9o';
@@ -34,13 +13,15 @@ const postList = document.querySelector('.post-lists');
 const addPost = async (e) => {
     e.preventDefault();
     const postFormData = Object.fromEntries(new FormData(postForm));
+    console.log(postFormData);
+    
 
-    try {
-        
-        const response = await fetch(`${supabaseUrl}/rest/v1/users`, {
+    const data = await supabase.auth.signUp({   email: postFormData.email,   password: postFormData.password, })
+    if (data) {
+        await fetch(`${supabaseUrl}/rest/v1/users`, {
             method: 'POST',
             body: JSON.stringify({
-                username: postFormData.username,
+                email: postFormData.email,
                 password: postFormData.password,
                 name: postFormData.name,
                 age: postFormData.age,
@@ -51,28 +32,33 @@ const addPost = async (e) => {
                 'Authorization': `Bearer ${secretKey}`,
                 'apikey': secretKey
             }
-        });
-
-       
-        if (response.ok) {
-            
-            alert("Başarıyla kayıt olundu!");
-            window.location.href = "login.html";
-            
-            await supabase
-                .storage
-                .from('image')
-                .upload(postFormData.image.name, postFormData.image, {
-                    cacheControl: '3600',
-                    upsert: false
-                });
-        } else {
-            
-            alert("Kayıt olma işlemi başarısız oldu.");
-        }
-    } catch (error) {
-        console.error("Hata:", error);
+        })
     }
+    // console.log(postFormData);
+    // const {
+    //     data,
+    //     error
+    // } = await supabase.auth.signUp({
+    //     email: postFormData.email,
+    //     password: postFormData.password,
+    //     options: {
+    //         data: {
+    //             name: 'asdfafs',
+    //             email: 'sajda@gmail.com',
+    //             age: 22
+    //         }
+    //     }
+    // })
+    
+    //  await supabase
+    //      .storage
+    //      .from('image')
+    //      .upload(postFormData.image.name, postFormData.image, {
+    //          cacheControl: '3600',
+    //          upsert: false
+    //      });
+
+
 }
 
 postForm.addEventListener('submit', addPost);
