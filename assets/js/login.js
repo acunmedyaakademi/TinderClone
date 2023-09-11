@@ -33,7 +33,7 @@ postForm.addEventListener('submit', async event => {
      if (user) {
       console.log('Giriş başarılı:')
       console.log(user);
-      window.location = '/'
+      window.location.href = 'tinder.html'
      } else {
        
        console.error('Giriş hatası:', error)

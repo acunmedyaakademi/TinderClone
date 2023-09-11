@@ -33,6 +33,7 @@ const addPost = async (e) => {
                 'apikey': secretKey
             }
         })
+      window.location.href = 'login.html'
     }
     // console.log(postFormData);
     // const {

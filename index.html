@@ -3,65 +3,44 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tinder</title>
-    <link rel="stylesheet" href="assets/css/style.css"> 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/hammer.js/2.0.8/hammer.min.js"></script>
-    <script src="assets/js/script.js" type="module" defer></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+    <title>Register</title>
+    <link rel="stylesheet" href="assets/css/register.css">
+    <script src="assets/js/register.js" type="module" defer></script>
+    <link rel="shortcut icon" href="assets/img/1200px-TinderIcon-2017.svg.png" type="image/x-icon">
 </head>
 <body>
-
-    <div class="container">
-
-        <!-- <div class="messageArea">
-
-            <p class="message">Mesajlar</p>
-
-            <div class="userMessage">
-
-                <div class="messageUserImg">
-                    <img src="assets/img/ellipse-13.png" alt="">
-                </div>
-
-                <div class="user_msg">
-
-                    <div class="messageUserName">
-                        <p>Sara Canning</p>
-                    </div>
-    
-                    <div class="userMessageMsg">
-                        <p>Good Morning</p>
-                    </div>
-
-                </div>
-
-            </div>
-        </div> -->
-        
-        <div class="tinderSwipe">
-
-            <div class="tinder">
-                <div class="tinderStatus">
-                    
-                </div>
-            </div>
-            
-            <div class="tinderCards">
-
-                <div class="tinderCard">
-                    
-                    
-                </div>
-
-                
-
-            </div>
-
+<div class="container">
+    <form class="post-form">
+        <div class="form">
+            <input class="input" placeholder="email" name="email" type="email" required>
+            <span class="input-border"></span>
         </div>
+        <div class="form">
+            <input class="input" placeholder="password" name="password" type="password" required>
+            <span class="input-border"></span>
+        </div>
+        <div class="form">
+            <input class="input" placeholder="name" name="name" type="text" required>
+            <span class="input-border"></span>
+        </div>
+        <div class="form">
+            <input class="input" placeholder="age" name="age" type="number" required>
+            <span class="input-border"></span>
+        </div>
+        <div class="form" style="margin-top: 2em;"> 
+            <label for="images" class="drop-container" id="dropcontainer">
+                <span class="drop-title">Drop image here</span>
+                or
+                <input type="file" id="images" name="image" accept="image/*" required>
+              </label>
+            <span class="input-border"></span>
+        </div>
+        <button type="submit">Register</button>
 
-    </div>
-    
+        <a href="login.html">Have you already registered?</a>
+
+    </form>
+
+</div>   
 </body>
 </html>
